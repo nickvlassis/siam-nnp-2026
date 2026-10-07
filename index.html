@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIAM NNP 2026 Conference Info</title>
+<meta name="description" content="SIAM NNP 2026 Annual Meeting, Rutgers University, Oct 23–25: campus map, schedule, parking, and bus info.">
+<meta name="theme-color" content="#302549">
+<style>
+:root{
+  --purple:#614F87; --purple-deep:#47376B; --purple-night:#302549;
+  --ink:#272B39; --soft:#454550; --muted:#6f6f79; --mist:#D4D7E0; --line:#e6e4ec;
+  --paper:#ffffff; --bg:#F5F4F8; --tint:#f1eef7;
+  --gold:#FFBD3B; --gold-deep:#EB910A; --scarlet:#CC0033; --scarlet-deep:#8a0022;
+  --c-arc:#614F87; --c-sec:#EB910A; --c-rwh:#CC0033; --c-casc:#302549;
+  --sans:"Helvetica Neue",Helvetica,Arial,"Liberation Sans",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:64px}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.45;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* ---------- header + tabs ---------- */
+.logobar{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#fff;padding:12px 24px;border-bottom:1px solid var(--line)}
+.logobar a{display:block;line-height:0}
+.logo-siam{height:44px;width:auto}
+.logo-soe{height:54px;width:auto}
+@media (max-width:480px){.logobar{padding:10px 16px}.logo-siam{height:24px}.logo-soe{height:30px}}
+header{background:var(--purple-night);color:#fff;padding:18px 24px 16px}
+header p b{color:#fff;font-weight:700}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
+.home-link{flex:none;display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--purple-night);
+  text-decoration:none;font-weight:700;font-size:14px;padding:9px 14px;border-radius:999px}
+.home-link:hover{background:#ffcb63}
+header .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+header h1{font-size:26px;font-weight:700;margin-top:4px;line-height:1.2}
+@media (max-width:480px){header{padding:16px 16px 14px}header h1{font-size:23px}}
+header p{font-size:14px;opacity:.85;margin-top:2px}
+
+.tabs{position:sticky;top:0;z-index:20;display:flex;gap:4px;padding:0 16px;background:var(--purple-night);
+  overflow-x:auto;scrollbar-width:none;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;color:#fff;text-decoration:none;font-size:15px;font-weight:600;padding:12px 14px 11px;
+  border-bottom:3px solid transparent;opacity:.75;white-space:nowrap}
+.tabs a:hover{opacity:1}
+.tabs a[aria-selected="true"]{opacity:1;border-bottom-color:var(--gold)}
+.tabs .short{display:none}
+@media (max-width:700px){.tabs{padding:0 6px;gap:0}.tabs a{font-size:14px;padding:12px 9px 11px}.tabs .long{display:none}.tabs .short{display:inline}}
+@media (max-width:400px){.tabs a{padding:12px 7px 11px}}
+
+.panel[hidden]{display:none}
+.wrap{max-width:1500px;margin:0 auto;padding:20px 24px}
+@media (max-width:980px){.wrap{padding:16px}}
+.narrow{max-width:760px}
+
+/* ---------- map tab ---------- */
+.days{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.days .lbl{font-size:13px;color:var(--muted);margin-right:4px}
+.days button{font:inherit;font-size:14px;border:1px solid var(--mist);background:#fff;color:var(--ink);
+  padding:7px 14px;border-radius:999px;cursor:pointer}
+.days button[aria-pressed="true"]{background:var(--purple);border-color:var(--purple);color:#fff}
+
+.map-grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:20px;align-items:start}
+@media (max-width:980px){.map-grid{grid-template-columns:1fr}}
+
+.map-wrap{position:relative;background:#fff;border-radius:14px;padding:10px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.map{position:relative;width:100%}
+.map img{display:block;width:100%;height:auto;user-select:none}
+.map svg{position:absolute;top:0;left:0;width:100%;height:auto;aspect-ratio:1842/1263}
+
+.bldg{cursor:pointer;outline:none}
+.bldg .shape{fill-opacity:.38;stroke-width:5;stroke-linejoin:round;transition:fill-opacity .2s,stroke-width .2s}
+.bldg:hover .shape,.bldg:focus-visible .shape,.bldg.active .shape{fill-opacity:.62;stroke-width:8}
+.bldg.off .shape{fill-opacity:.08;stroke-dasharray:10 8;stroke-width:3}
+.bldg.off .pin{opacity:.45}
+.pin circle{stroke:#fff;stroke-width:5}
+.pin text{fill:#fff;font:700 26px var(--sans);text-anchor:middle;dominant-baseline:central}
+.pin .label{fill:var(--ink);font:700 24px var(--sans);dominant-baseline:central}
+.pin .label-bg{fill:#fff;stroke:none;opacity:.95}
+.pulse{fill:none;stroke-width:4;opacity:0;transform-box:fill-box;transform-origin:center}
+.bldg.active .pulse{animation:pulse 1.6s ease-out infinite}
+@keyframes pulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
+@media (prefers-reduced-motion:reduce){.bldg.active .pulse{animation:none}}
+
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;padding:10px 6px 2px;color:#555}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block;flex:none}
+
+.list{display:flex;flex-direction:column;gap:14px}
+.card{background:#fff;border-radius:14px;border:2px solid transparent;box-shadow:0 1px 3px rgba(0,0,0,.08);
+  overflow:hidden;cursor:pointer;transition:border-color .2s,opacity .2s}
+.card.active{border-color:var(--c)}
+.card.off{opacity:.5}
+.card .photo{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--mist)}
+.card .top{display:flex;gap:12px;align-items:flex-start;padding:14px 16px 10px}
+.badge{flex:none;width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;font-weight:700;
+  display:grid;place-items:center;font-size:16px}
+.card h2{font-size:17px;line-height:1.25}
+.code{font-size:12px;letter-spacing:.08em;color:var(--c);font-weight:700;text-transform:uppercase}
+.card .role{font-size:13px;color:#555;margin-top:3px}
+.card ul{list-style:none;padding:0 16px 6px}
+.card li{display:grid;grid-template-columns:112px 1fr;gap:8px;font-size:13px;padding:6px 0;border-top:1px solid #eee}
+.card li.hide{display:none}
+.card li b{font-weight:700;color:var(--purple-deep)}
+.card li small{display:block;color:#666;margin-top:1px}
+.links{display:flex;gap:8px;padding:10px 16px 14px;flex-wrap:wrap}
+.links a{font-size:13px;font-weight:600;text-decoration:none;padding:7px 12px;border-radius:8px;background:var(--c);color:#fff}
+.links a.ghost{background:transparent;color:var(--ink);border:1px solid var(--mist)}
+
+.popup{position:absolute;left:20px;bottom:20px;width:min(320px,calc(100% - 40px));background:#fff;border-radius:12px;
+  box-shadow:0 8px 28px rgba(0,0,0,.28);overflow:hidden;border-top:4px solid var(--c)}
+.popup[hidden]{display:none}
+.popup img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.popup .body{padding:10px 14px 12px}
+.popup h2{font-size:16px;line-height:1.25;margin:2px 0 4px}
+.popup p{font-size:13px;color:#555}
+.popup .links{padding:10px 0 0}
+.popup .close{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;border:0;
+  background:rgba(0,0,0,.6);color:#fff;font-size:18px;line-height:30px;cursor:pointer}
+@media (max-width:600px){.popup{position:relative;left:auto;bottom:auto;width:auto;margin-top:10px;box-shadow:0 2px 10px rgba(0,0,0,.15)}.popup img{aspect-ratio:21/9}}
+.map-note{font-size:13px;color:var(--muted);padding:8px 6px 0}
+.map-note a{color:var(--purple-deep);font-weight:600}
+
+/* ---------- info tabs (schedule, parking, bus) ---------- */
+.sheet{background:#fff;border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden}
+.sheet + .sheet{margin-top:16px}
+.sheet .body{padding:6px 24px 24px}
+@media (max-width:600px){.sheet .body{padding:4px 16px 20px}}
+.sheet h2{font-size:22px;padding:20px 24px 0}
+@media (max-width:600px){.sheet h2{padding:18px 16px 0}}
+.sec-title{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);
+  margin:22px 0 12px;display:flex;align-items:center;gap:11px}
+.sec-title::after{content:"";flex:1;height:1.5px;background:var(--line)}
+p.lead{font-size:15px;color:var(--soft);margin-bottom:12px}
+p.lead b,.facts b,.steps b,.grp b,.tip b{color:var(--ink)}
+
+.btn{display:block;text-align:center;background:var(--purple);color:#fff;text-decoration:none;
+  font-weight:700;font-size:15px;padding:13px 16px;border-radius:11px;margin:16px 0 6px}
+.btn small{display:block;font-weight:500;font-size:12px;opacity:.8;margin-top:2px;word-break:break-all}
+.btn.dark{background:var(--ink)}
+
+.tip{margin-top:16px;padding:14px 16px;border-left:3px solid var(--purple);background:var(--tint);
+  border-radius:0 10px 10px 0;font-size:14px;color:var(--soft)}
+.tip a,.link-row a,.inline-link{color:var(--purple-deep);font-weight:700;word-break:break-word}
+.note{font-size:12.5px;color:var(--muted);margin-top:14px}
+
+/* schedule */
+.day-h{font-size:16px;font-weight:800;color:var(--purple-night);margin:22px 0 4px;display:flex;align-items:baseline;gap:10px}
+.day-h small{font-size:12px;font-weight:600;color:var(--muted)}
+.sched{list-style:none}
+.sched li{display:grid;grid-template-columns:132px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px}
+.sched li:first-child{border-top:0}
+.sched .t{font-weight:700;color:var(--purple-deep);font-variant-numeric:tabular-nums}
+.sched .w{color:var(--ink)}
+.sched .w small{display:block;color:var(--muted);font-size:12.5px;margin-top:1px}
+.place{display:inline-flex;align-items:center;gap:6px;margin-top:5px;font-size:12px;font-weight:700;text-decoration:none;
+  padding:3px 9px 3px 4px;border-radius:999px;background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);
+  border:1px solid color-mix(in srgb,var(--c) 35%,#fff)}
+.place i{font-style:normal;width:18px;height:18px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-size:11px}
+.places{display:flex;gap:6px;flex-wrap:wrap}
+@media (max-width:600px){.sched li{grid-template-columns:1fr;gap:2px}}
+
+/* parking */
+.grp{font-size:14.5px;color:var(--soft);margin:14px 0 8px}
+.lots{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 4px}
+.lot{display:block;text-decoration:none;background:var(--tint);color:var(--purple-deep);font-weight:800;font-size:15px;
+  border:1px solid color-mix(in srgb,var(--purple) 30%,transparent);border-radius:10px;padding:9px 14px}
+.lot small{display:block;font-weight:600;font-size:10.5px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;margin-top:1px}
+.lot.banq{background:#fff;border:1.5px solid var(--purple)}
+ol.steps{list-style:none;counter-reset:s;display:grid;gap:11px}
+ol.steps li{position:relative;padding-left:34px;font-size:14.5px;color:var(--soft)}
+ol.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:23px;height:23px;border-radius:50%;
+  background:var(--purple);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center}
+.link-row{font-size:13.5px;color:var(--soft);margin-top:6px}
+
+/* bus tab */
+.event-box{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;background:var(--purple-night);color:#fff;border-radius:12px;padding:16px 18px;margin:14px 0 4px}
+.event-box .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;padding-top:2px}
+.event-box .v{font-size:15px;font-weight:600}
+.event-box a{color:#fff}
+ul.facts{list-style:none;display:grid;gap:10px}
+ul.facts li{position:relative;padding-left:22px;font-size:14.5px;color:var(--soft)}
+ul.facts li::before{content:"";position:absolute;left:3px;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--purple)}
+.route{display:flex;align-items:center;gap:12px;background:var(--tint);border-radius:12px;padding:14px 16px;margin-bottom:8px}
+.route .pt{flex:1}
+.route .k{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.route .v{font-size:15px;font-weight:700;line-height:1.25;margin-top:2px}
+.route a{display:inline-block;margin-top:5px;font-size:12.5px;font-weight:700;color:var(--purple-deep);text-decoration:none}
+.route .arr{color:var(--purple);font-size:20px;font-weight:800;flex:none}
+.pill{display:inline-flex;align-items:center;gap:8px;margin:14px 0 10px;background:var(--ink);color:#fff;border-radius:30px;padding:7px 15px;font-weight:700;font-size:14px}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.times{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.times .row{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;font-size:15px;border-top:1px solid var(--line)}
+.times .row:first-child{border-top:0}
+.times .row:nth-child(even){background:#faf9fc}
+.times .dep{font-weight:700;font-variant-numeric:tabular-nums}
+.times .dep span{color:var(--muted);font-weight:600}
+.times .dur{font-size:12.5px;color:var(--muted)}
+
+footer{text-align:center;font-size:12px;color:#777;padding:10px 16px 28px}
+footer a{color:var(--purple-deep)}
+</style>
+</head>
+<body>
+
+<div class="logobar">
+  <a href="https://www.siam.org/" target="_blank" rel="noopener"><img class="logo-siam" src="images/siam-logo.png" alt="SIAM"></a>
+  <a href="https://soe.rutgers.edu/" target="_blank" rel="noopener"><img class="logo-soe" src="images/rutgers-soe-logo.png" alt="Rutgers–New Brunswick School of Engineering"></a>
+</div>
+<header>
+  <div class="hdr-text">
+  <div class="eyebrow">New York · New Jersey · Pennsylvania Section of SIAM</div>
+  <h1>SIAM NNP 2026 Annual Meeting</h1>
+  <p><b>Conference Information</b> · October 23–25, 2026 · Rutgers University, Busch Campus, Piscataway, NJ</p>
+  </div>
+  <a class="home-link" href="https://siamnnp2026.sciencesconf.org/?lang=en" target="_blank" rel="noopener">Conference website <span aria-hidden="true">↗</span></a>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Conference information">
+  <a href="#map" role="tab" id="tab-map" aria-controls="map"><span class="long">Campus </span>Map</a>
+  <a href="#schedule" role="tab" id="tab-schedule" aria-controls="schedule">Schedule<span class="long"> at a Glance</span></a>
+  <a href="#register" role="tab" id="tab-register" aria-controls="register"><span class="long">On-site </span>Regist<span class="long">ration</span><span class="short">er</span></a>
+  <a href="#parking" role="tab" id="tab-parking" aria-controls="parking">Parking</a>
+  <a href="#bus" role="tab" id="tab-bus" aria-controls="bus">Buses<span class="long"> and Getting to the Banquet</span></a>
+</nav>
+
+<!-- =================== CAMPUS MAP =================== -->
+<section class="panel" id="map" role="tabpanel" aria-labelledby="tab-map">
+  <div class="wrap">
+    <div class="days" role="group" aria-label="Filter by day">
+      <span class="lbl">Show:</span>
+      <button data-day="all" aria-pressed="true">All days</button>
+      <button data-day="fri" aria-pressed="false">Fri Oct 23</button>
+      <button data-day="sat" aria-pressed="false">Sat Oct 24</button>
+      <button data-day="sun" aria-pressed="false">Sun Oct 25</button>
+    </div>
+    <div class="map-grid">
+      <div class="map-wrap">
+        <div class="map">
+          <img src="images/campus-render.webp" width="1842" height="1263" alt="3D render of Rutgers Busch Campus with the three conference buildings highlighted">
+          <svg viewBox="0 0 1842 1263" role="group" aria-label="Conference buildings">
+            <g id="shapes"></g>
+            <g id="pins"></g>
+          </svg>
+          <div class="popup" id="popup" hidden role="dialog" aria-live="polite"></div>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--c-rwh)"></i>Registration, career panel, lunch, posters, minisymposia</span>
+          <span><i style="background:var(--c-arc)"></i>Plenaries, coffee, minisymposia</span>
+          <span><i style="background:var(--c-sec)"></i>Minisymposia</span>
+        </div>
+        <p class="map-note">Tap a highlighted building for a photo and directions. The banquet is on College Avenue campus: see the <a href="#bus">Buses</a> tab.</p>
+      </div>
+      <aside class="list" id="list" aria-label="Conference buildings"></aside>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SCHEDULE =================== -->
+<section class="panel" id="schedule" role="tabpanel" aria-labelledby="tab-schedule" hidden>
+  <div class="wrap narrow">
+    <div class="sheet">
+      <h2>Schedule at a glance</h2>
+      <div class="body">
+        <a class="btn" href="https://siamnnp2026.sciencesconf.org/program?lang=en" target="_blank" rel="noopener">Full program: every talk, room &amp; abstract<small>siamnnp2026.sciencesconf.org/program</small></a>
+        <p class="note">The full program is the official version. Tap a building tag below to see it on the map.</p>
+        <div id="sched"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ON-SITE REGISTRATION =================== -->
+<section class="panel" id="register" role="tabpanel" aria-labelledby="tab-register" hidden>
+  <div class="wrap narrow">
+    <div class="sheet">
+      <h2>On-site registration</h2>
+      <div class="body">
+        <p class="lead" style="margin-top:14px">If you have <b>not registered and paid for a registration yet</b>, please use the following link to register, and show your <b>registration email</b> at the registration desk to receive your badge.</p>
+        <a class="btn" href="https://my.siam.org/Conference/Listing" target="_blank" rel="noopener">Register on my.siam.org<small>my.siam.org/Conference/Listing</small></a>
+
+        <div class="sec-title">Registration desk</div>
+        <div class="event-box">
+          <div class="k">Where</div><div class="v">Richard Weeks Hall, lobby atria<br><a href="#map/rwh">Show on map →</a></div>
+          <div class="k">Sat</div><div class="v">Oct 24 · 8:00 AM–5:00 PM</div>
+          <div class="k">Sun</div><div class="v">Oct 25 · 8:00 AM–1:00 PM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PARKING =================== -->
+<section class="panel" id="parking" role="tabpanel" aria-labelledby="tab-parking" hidden>
+  <div class="wrap narrow">
+    <div class="sheet">
+      <h2>Parking for attendees</h2>
+      <div class="body">
+        <div class="sec-title">Where to park</div>
+        <p class="lead">Special event parking has been arranged for conference attendees. Where to park depends on the event:</p>
+        <p class="grp"><b>Attending the main conference activities?</b> Park in Lot 58 or Lot 58A.</p>
+        <div class="lots">
+          <a class="lot" href="https://maps.app.goo.gl/i5uAUVYk5CRJMhcG9" target="_blank" rel="noopener">Lot 58<small>Open map →</small></a>
+          <a class="lot" href="https://maps.app.goo.gl/3msTaahQoCCNHa6k8" target="_blank" rel="noopener">Lot 58A<small>Open map →</small></a>
+        </div>
+        <p class="grp"><b>Attending the banquet?</b> Lots 26 and 30 serve the College Avenue Deck area for the banquet, so you can park in any of those three.</p>
+        <div class="lots">
+          <a class="lot banq" href="https://maps.app.goo.gl/zYPEHfV4TWiYi1tDA" target="_blank" rel="noopener">Lot 26<small>Banquet parking · Open map →</small></a>
+          <a class="lot banq" href="https://maps.app.goo.gl/Txdk4BxKGT1mE13s6" target="_blank" rel="noopener">Lot 30<small>Banquet parking · Open map →</small></a>
+          <a class="lot banq" href="https://maps.app.goo.gl/8XFRa2p4hQ7riQaQ6" target="_blank" rel="noopener">College Avenue Deck<small>Banquet parking · Open map →</small></a>
+        </div>
+
+        <div class="sec-title">How to register (visitors)</div>
+        <ol class="steps">
+          <li>Open the <b>event parking registration link</b> below in any web browser.</li>
+          <li>Click <b>“Visitor”</b>, then enter your <b>email and vehicle information</b>.</li>
+          <li>You’ll receive a <b>confirmation by email and/or text</b> once registration is complete.</li>
+        </ol>
+        <a class="btn dark" href="https://parkingbase.com/c/rutgers/d/3676664?eventId=98f8b005-7816-48d5-ac40-98bb9145a243" target="_blank" rel="noopener">Register for event parking<small>parkingbase.com/c/rutgers/d/3676664</small></a>
+        <div class="link-row">Step-by-step guide: <a href="https://scribehow.com/viewer/How_to_Book_Parking_for_a_Rutgers_Event__XPR6oqs6Rl2Yn1Mk-HNnRw" target="_blank" rel="noopener">How to book parking for a Rutgers event</a></div>
+
+        <div class="tip"><b>Rutgers faculty, staff &amp; students:</b> you must use a valid Rutgers parking permit (Semester, Daily, or Event) and park according to your assignment. Parking without a permit, or outside your assignment, may result in ticketing or towing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== BUS =================== -->
+<section class="panel" id="bus" role="tabpanel" aria-labelledby="tab-bus" hidden>
+  <div class="wrap narrow">
+    <div class="sheet">
+      <h2>Getting around by campus bus</h2>
+      <div class="body">
+        <p class="lead" style="margin-top:12px">Rutgers runs a <b>free campus bus system</b> connecting Busch campus, where the conference is held, with the College Avenue campus and the rest of the university. The buses are open to everyone, with no fare or ID needed, so you can simply board.</p>
+        <ul class="facts">
+          <li>Most conference sessions are on <b>Busch campus</b> (Allison Road Classrooms, SEC, and Weeks Hall) and are within easy <b>walking distance</b> of each other. See the <a class="inline-link" href="#map">Campus Map</a>.</li>
+          <li>The meeting runs over a <b>weekend</b>, so buses follow the <b>weekend routes</b> (Weekend 1 and Weekend 2). Weekend service is less frequent than weekdays, so it helps to check departure times ahead.</li>
+        </ul>
+        <div class="tip"><b>Download the TripShot app.</b> It shows <b>live bus locations</b>, lets you plan a trip between any two stops, and lists full campus schedules:<br>
+          <a href="https://ipo.rutgers.edu/transportation/new-transit-tracking-tripshot" target="_blank" rel="noopener">ipo.rutgers.edu/transportation/new-transit-tracking-tripshot</a></div>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <h2>Getting to the banquet</h2>
+      <div class="body">
+        <div class="event-box">
+          <div class="k">When</div><div class="v">Saturday, Oct 24 · 7:30–9:00 PM</div>
+          <div class="k">Where</div><div class="v">College Avenue Student Center (CASC), Multipurpose Room<br><a href="https://maps.app.goo.gl/Sf3geNTQdcvXQPw29" target="_blank" rel="noopener">Open map →</a></div>
+        </div>
+        <p class="note">Driving? Banquet parking is in Lots 26, 30 or the College Avenue Deck. See <a class="inline-link" href="#parking">Parking</a>.</p>
+
+        <div class="sec-title">By campus bus</div>
+        <p class="lead">After the final Saturday plenary at the <b>Allison Road Classrooms (ARC)</b>, you can ride a campus bus straight to the <b>banquet at the College Avenue Student Center</b>. The direct bus is the <b>Weekend 2</b> route, and the trip takes about <b>10 minutes</b> with no transfer.</p>
+        <div class="route">
+          <div class="pt"><div class="k">From</div><div class="v">Allison Road Classrooms</div><a href="https://maps.app.goo.gl/5XehGSya1oB8cJ9a9" target="_blank" rel="noopener">Bus stop map →</a></div>
+          <div class="arr">→</div>
+          <div class="pt"><div class="k">To</div><div class="v">College Avenue Student Center</div><a href="https://maps.app.goo.gl/Sf3geNTQdcvXQPw29" target="_blank" rel="noopener">Bus stop map →</a></div>
+        </div>
+        <div class="pill"><span class="dot"></span>Weekend 2 · direct</div>
+        <div class="times">
+          <div class="row"><div class="dep">6:50 PM <span>→ 7:00 PM</span></div><div class="dur">~10 min</div></div>
+          <div class="row"><div class="dep">7:10 PM <span>→ 7:20 PM</span></div><div class="dur">~10 min</div></div>
+          <div class="row"><div class="dep">7:30 PM <span>→ 7:40 PM</span></div><div class="dur">~10 min</div></div>
+          <div class="row"><div class="dep">7:50 PM <span>→ 8:00 PM</span></div><div class="dur">~10 min</div></div>
+        </div>
+        <p class="note">Times are the current scheduled Weekend 2 departures and may vary slightly. Other routes (e.g., Weekend 1) can also reach College Avenue but require a walk and a transfer, so the Weekend 2 bus is the simplest option. Please check the TripShot app the day of for live updates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>SIAM NNP 2026 Annual Meeting · Rutgers University · October 23–25, 2026 · <a href="https://siamnnp2026.sciencesconf.org/" target="_blank" rel="noopener">siamnnp2026.sciencesconf.org</a></footer>
+
+<script>
+// ---------- buildings (outlines traced in campus-render pixel space, 1842 x 1263) ----------
+const BUILDINGS = [
+  {
+    id:'rwh', n:1, code:'RWH', color:'var(--c-rwh)', photo:'images/rwh.webp',
+    name:'Richard Weeks Hall of Engineering',
+    role:'Registration, Friday career panel, Saturday lunch & posters, minisymposia in RWH 105',
+    addr:'500 Bartholomew Rd, Piscataway, NJ 08854',
+    maps:'https://maps.app.goo.gl/JfVAiNAWBwML9V8G8',
+    pts:[[1455,485],[1472,480],[1472,472],[1500,465],[1527,465],[1555,465],[1575,480],[1595,507],[1615,527],[1645,547],[1660,570],[1652,585],[1652,610],[1650,625],[1615,605],[1600,597],[1577,600],[1565,590],[1560,607],[1530,612],[1512,595],[1515,565],[1505,545],[1500,527],[1457,502]],
+    pin:[1530,440], labelSide:'left',
+    events:[
+      {day:'fri',time:'5:00–8:00 PM',what:'Career Panel for Students and Junior Researchers',where:'Richard Weeks Hall'},
+      {day:'sat',time:'8:00 AM–5:00 PM',what:'Registration',where:'RWH lobby atria'},
+      {day:'sat',time:'10:00 AM–12:05 PM',what:'Minisymposium',where:'RWH 105'},
+      {day:'sat',time:'12:05–2:00 PM',what:'Lunch',where:'RWH 1st & 2nd floor lobby atria'},
+      {day:'sat',time:'12:05–2:00 PM',what:'Poster session',where:'RWH lobby atria'},
+      {day:'sat',time:'3:00–5:05 PM',what:'Minisymposium',where:'RWH 105'},
+      {day:'sun',time:'8:00 AM–1:00 PM',what:'Registration',where:'RWH lobby atria'},
+      {day:'sun',time:'8:30–10:35 AM',what:'Minisymposium',where:'RWH 105'},
+    ]
+  },
+  {
+    id:'arc', n:2, code:'ARC', color:'var(--c-arc)', photo:'images/arc.webp',
+    name:'Allison Road Classroom',
+    role:'Plenary talks, opening & closing remarks (ARC 103), coffee breaks, minisymposia',
+    addr:'607 Allison Rd, Piscataway, NJ 08854',
+    maps:'https://maps.app.goo.gl/PHnWAXbEWaZfG2Y37',
+    pts:[[517,139],[605,123],[622,153],[645,155],[668,163],[673,180],[668,200],[640,203],[612,202],[600,190],[582,190],[531,193],[518,166]],
+    pin:[594,112], labelSide:'right',
+    events:[
+      {day:'sat',time:'8:30–9:30 AM',what:'Opening remarks + plenary talk',where:'ARC 103'},
+      {day:'sat',time:'9:30–10:00 AM',what:'Coffee break',where:'Lobby outside ARC 103'},
+      {day:'sat',time:'10:00 AM–12:05 PM',what:'Minisymposia',where:'ARC 105, 107, 204, 205, 206, 207'},
+      {day:'sat',time:'2:00–3:00 PM',what:'Plenary talk',where:'ARC 103'},
+      {day:'sat',time:'3:00–5:05 PM',what:'Minisymposia',where:'ARC 105, 107, 204, 205, 206, 207'},
+      {day:'sat',time:'5:05–5:30 PM',what:'Coffee break',where:'Lobby outside ARC 103'},
+      {day:'sat',time:'5:30–6:30 PM',what:'Plenary talk',where:'ARC 103'},
+      {day:'sun',time:'8:30–10:35 AM',what:'Minisymposia',where:'ARC 105, 107, 205, 206, 207'},
+      {day:'sun',time:'10:35–11:00 AM',what:'Coffee break',where:'Lobby outside ARC 103'},
+      {day:'sun',time:'11:00 AM–12:00 PM',what:'Plenary talk',where:'ARC 103'},
+      {day:'sun',time:'12:00–12:15 PM',what:'Closing remarks',where:'ARC 103'},
+    ]
+  },
+  {
+    id:'sec', n:3, code:'SEC', color:'var(--c-sec)', photo:'images/serc.webp',
+    name:'Science & Engineering Resource Center',
+    role:'Most of the parallel minisymposia (up to 18 rooms at once)',
+    addr:'118 Frelinghuysen Rd, Piscataway, NJ 08854',
+    maps:'https://maps.app.goo.gl/t8aFTvSzzT7ZbGsH9',
+    pts:[[660,438],[750,420],[798,515],[797,530],[785,537],[705,553],[700,540],[660,450]],
+    pin:[730,405], labelSide:'right',
+    events:[
+      {day:'sat',time:'10:00 AM–12:05 PM',what:'Minisymposia (18 rooms)',where:'SEC 111, 117, 118, 202–212, 216, 217, 218, 220'},
+      {day:'sat',time:'3:00–5:05 PM',what:'Minisymposia (17 rooms)',where:'SEC 111, 117, 118, 202–205, 207–212, 216, 217, 218, 220'},
+      {day:'sun',time:'8:30–10:35 AM',what:'Minisymposia (10 rooms)',where:'SEC 111, 117, 118, 202, 204, 206, 211, 212, 216, 217'},
+    ]
+  }
+];
+
+// ---------- schedule overview (from siamnnp2026.sciencesconf.org/program) ----------
+const SCHEDULE = [
+  {day:'Friday, October 23', note:'Evening', items:[
+    {t:'5:00–8:00 PM', w:'Career Panel for Students and Junior Researchers', at:['rwh']},
+  ]},
+  {day:'Saturday, October 24', note:'Full day', items:[
+    {t:'8:00 AM–5:00 PM', w:'Registration', s:'RWH lobby atria', at:['rwh']},
+    {t:'8:30–9:30 AM', w:'Opening Remarks and Plenary Talk', s:'ARC 103', at:['arc']},
+    {t:'9:30–10:00 AM', w:'Coffee break', s:'Lobby outside ARC 103', at:['arc']},
+    {t:'10:00 AM–12:05 PM', w:'Minisymposia (25 parallel sessions)', at:['rwh','arc','sec']},
+    {t:'12:05–2:00 PM', w:'Lunch + Poster Session', s:'RWH 1st & 2nd floor lobby atria', at:['rwh']},
+    {t:'2:00–3:00 PM', w:'Plenary Talk', s:'ARC 103', at:['arc']},
+    {t:'3:00–5:05 PM', w:'Minisymposia (24 parallel sessions)', at:['rwh','arc','sec']},
+    {t:'5:05–5:30 PM', w:'Coffee break', s:'Lobby outside ARC 103', at:['arc']},
+    {t:'5:30–6:30 PM', w:'Plenary Talk', s:'ARC 103', at:['arc']},
+    {t:'6:50–7:50 PM', w:'Weekend 2 bus to the banquet', s:'Departs Allison Road Classrooms every 20 min', link:['#bus','Bus times']},
+    {t:'7:30–9:00 PM', w:'Banquet', s:'College Avenue Student Center, Multipurpose Room', link:['#bus','Getting there']},
+  ]},
+  {day:'Sunday, October 25', note:'Half day', items:[
+    {t:'8:00 AM–1:00 PM', w:'Registration', s:'RWH lobby atria', at:['rwh']},
+    {t:'8:30–10:35 AM', w:'Minisymposia (16 parallel sessions)', at:['rwh','arc','sec']},
+    {t:'10:35–11:00 AM', w:'Coffee break', s:'Lobby outside ARC 103', at:['arc']},
+    {t:'11:00 AM–12:00 PM', w:'Plenary Talk', s:'ARC 103', at:['arc']},
+    {t:'12:00–12:15 PM', w:'Closing Remarks', s:'ARC 103', at:['arc']},
+  ]},
+];
+
+const DAYS = {fri:'Fri', sat:'Sat', sun:'Sun'};
+const byId = Object.fromEntries(BUILDINGS.map(b => [b.id, b]));
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs={}, parent) => {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const dirLink = b => `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(b.addr)}`;
+
+// ---------- map ----------
+const shapes = document.getElementById('shapes');
+const pins = document.getElementById('pins');
+const list = document.getElementById('list');
+const popup = document.getElementById('popup');
+let activeId = null;
+
+BUILDINGS.forEach(b => {
+  const pts = b.pts.map(p => p.join(',')).join(' ');
+  const g = el('g', {class:'bldg', 'data-id':b.id, tabindex:0, role:'button', 'aria-label':b.name}, shapes);
+  el('polygon', {class:'shape', points:pts, style:`fill:${b.color};stroke:${b.color}`}, g);
+
+  const [x, y] = b.pin;
+  const pg = el('g', {class:'bldg pin-g', 'data-id':b.id}, pins);
+  const pin = el('g', {class:'pin'}, pg);
+  el('line', {x1:x, y1:y, x2:x, y2:y+34, stroke:'#fff', 'stroke-width':5}, pin);
+  el('circle', {class:'pulse', cx:x, cy:y, r:24, style:`stroke:${b.color}`}, pin);
+  el('circle', {cx:x, cy:y, r:24, style:`fill:${b.color}`}, pin);
+  el('text', {x, y}, pin).textContent = b.n;
+  const right = b.labelSide === 'right';
+  const lx = right ? x + 34 : x - 34;
+  const bg = el('rect', {class:'label-bg', rx:8, height:40, y:y-20}, pin);
+  const lab = el('text', {class:'label', x:lx + (right ? 12 : -12), y}, pin);
+  lab.textContent = b.code;
+  lab.style.textAnchor = right ? 'start' : 'end';
+  b._fitLabel = () => {
+    const w = lab.getBBox().width + 24;
+    if (!w || w === 24) return;
+    bg.setAttribute('width', w);
+    bg.setAttribute('x', right ? lx : lx - w);
+  };
+
+  [g, pg].forEach(n => {
+    n.addEventListener('click', () => select(b.id, true));
+    n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(b.id, true); } });
+  });
+
+  const card = document.createElement('article');
+  card.className = 'card'; card.dataset.id = b.id;
+  card.style.setProperty('--c', b.color);
+  card.innerHTML = `
+    <img class="photo" src="${b.photo}" alt="${b.name}" loading="lazy">
+    <div class="top">
+      <div class="badge">${b.n}</div>
+      <div>
+        <div class="code">${b.code}</div>
+        <h2>${b.name}</h2>
+        <div class="role">${b.role}</div>
+      </div>
+    </div>
+    <ul>${b.events.map(e => `<li data-day="${e.day}"><b>${DAYS[e.day]} ${e.time}</b><span>${e.what}<small>${e.where}</small></span></li>`).join('')}</ul>
+    <div class="links">
+      <a href="${b.maps}" target="_blank" rel="noopener">Open in Google Maps</a>
+      <a class="ghost" href="${dirLink(b)}" target="_blank" rel="noopener">Directions</a>
+    </div>`;
+  card.addEventListener('click', e => { if (!e.target.closest('a')) select(b.id, false); });
+  list.appendChild(card);
+});
+
+function showPopup(b){
+  if (!b) { popup.hidden = true; return; }
+  popup.style.setProperty('--c', b.color);
+  popup.innerHTML = `
+    <img src="${b.photo}" alt="${b.name}">
+    <button class="close" aria-label="Close">×</button>
+    <div class="body">
+      <div class="code">${b.n} · ${b.code}</div>
+      <h2>${b.name}</h2>
+      <p>${b.role}</p>
+      <div class="links">
+        <a href="${b.maps}" target="_blank" rel="noopener" style="background:${b.color}">Open in Google Maps</a>
+        <a class="ghost" href="${dirLink(b)}" target="_blank" rel="noopener">Directions</a>
+      </div>
+    </div>`;
+  popup.querySelector('.close').addEventListener('click', () => select(null));
+  popup.hidden = false;
+}
+
+function select(id, withPopup, force){
+  activeId = id && (force || activeId !== id) ? id : null;
+  document.querySelectorAll('[data-id]').forEach(n => n.classList.toggle('active', n.dataset.id === activeId));
+  showPopup(withPopup ? byId[activeId] : null);
+}
+
+function setDay(day){
+  document.querySelectorAll('.days button').forEach(btn => btn.setAttribute('aria-pressed', btn.dataset.day === day));
+  BUILDINGS.forEach(b => {
+    const used = day === 'all' || b.events.some(e => e.day === day);
+    document.querySelectorAll(`[data-id="${b.id}"]`).forEach(n => n.classList.toggle('off', !used));
+  });
+  document.querySelectorAll('.card li').forEach(li => li.classList.toggle('hide', day !== 'all' && li.dataset.day !== day));
+}
+document.querySelectorAll('.days button').forEach(btn => btn.addEventListener('click', () => setDay(btn.dataset.day)));
+
+// ---------- schedule ----------
+document.getElementById('sched').innerHTML = SCHEDULE.map(d => `
+  <h3 class="day-h">${d.day} <small>${d.note}</small></h3>
+  <ul class="sched">${d.items.map(i => `
+    <li><span class="t">${i.t}</span><span class="w">${i.w}${i.s ? `<small>${i.s}</small>` : ''}
+      ${i.at ? `<span class="places">${i.at.map(id => { const b = byId[id];
+        return `<a class="place" href="#map/${id}" style="--c:${b.color}"><i>${b.n}</i>${b.code}</a>`; }).join('')}</span>` : ''}
+      ${i.link ? `<span class="places"><a class="place" href="${i.link[0]}" style="--c:var(--c-casc)"><i>→</i>${i.link[1]}</a></span>` : ''}
+    </span></li>`).join('')}
+  </ul>`).join('');
+
+// ---------- tabs (hash routing: #map, #map/rwh, #schedule, #register, #parking, #bus) ----------
+const PANELS = ['map','schedule','register','parking','bus'];
+if (location.hash.startsWith('#banquet')) history.replaceState(null, '', '#bus');
+function route(){
+  const [name, sub] = location.hash.replace('#','').split('/');
+  const tab = PANELS.includes(name) ? name : 'map';
+  PANELS.forEach(p => {
+    document.getElementById(p).hidden = p !== tab;
+    document.getElementById('tab-' + p).setAttribute('aria-selected', p === tab);
+  });
+  if (tab === 'map') {
+    BUILDINGS.forEach(b => b._fitLabel());
+    if (byId[sub]) {
+      select(sub, true, true);
+      document.querySelector('.map-wrap').scrollIntoView({block:'start'});
+      return;
+    }
+  }
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>
