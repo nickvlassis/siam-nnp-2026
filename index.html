@@ -47,7 +47,7 @@ header p{font-size:14px;opacity:.85;margin-top:2px}
 .tabs a[aria-selected="true"]{opacity:1;border-bottom-color:var(--gold)}
 .tabs .short{display:none}
 @media (max-width:700px){.tabs{padding:0 6px;gap:0}.tabs a{font-size:14px;padding:12px 9px 11px}.tabs .long{display:none}.tabs .short{display:inline}}
-@media (max-width:400px){.tabs a{padding:12px 7px 11px}}
+@media (max-width:420px){.tabs a{font-size:13px;padding:12px 6px 11px}}
 
 .panel[hidden]{display:none}
 .wrap{max-width:1500px;margin:0 auto;padding:20px 24px}
@@ -223,6 +223,7 @@ footer a{color:var(--purple-deep)}
   <a href="#register" role="tab" id="tab-register" aria-controls="register"><span class="long">On-site </span>Regist<span class="long">ration</span><span class="short">er</span></a>
   <a href="#parking" role="tab" id="tab-parking" aria-controls="parking">Parking</a>
   <a href="#bus" role="tab" id="tab-bus" aria-controls="bus">Buses<span class="long"> and Getting to the Banquet</span></a>
+  <a href="#survey" role="tab" id="tab-survey" aria-controls="survey">Survey</a>
 </nav>
 
 <!-- =================== CAMPUS MAP =================== -->
@@ -373,6 +374,23 @@ footer a{color:var(--purple-deep)}
           <div class="row"><div class="dep">7:50 PM <span>→ 8:00 PM</span></div><div class="dur">~10 min</div></div>
         </div>
         <p class="note">Times are the current scheduled Weekend 2 departures and may vary slightly. Other routes (e.g., Weekend 1) can also reach College Avenue but require a walk and a transfer, so the Weekend 2 bus is the simplest option. Please check the TripShot app the day of for live updates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SURVEY =================== -->
+<section class="panel" id="survey" role="tabpanel" aria-labelledby="tab-survey" hidden>
+  <div class="wrap narrow">
+    <div class="sheet">
+      <h2>Conference survey</h2>
+      <div class="body">
+        <p class="lead" style="margin-top:14px">Thank you for attending the SIAM NNP 2026 Annual Meeting! Please tell us how the meeting went. The survey takes only a few minutes, and your feedback helps us plan future meetings.</p>
+        <a class="btn" href="https://forms.gle/ZbAY6pVKKdMWkRSM9" target="_blank" rel="noopener">Take the survey<small>forms.gle/ZbAY6pVKKdMWkRSM9</small></a>
+        <div style="text-align:center;margin-top:18px">
+          <img src="images/survey-qr.png" alt="QR code for the conference survey" style="width:180px;height:auto;image-rendering:pixelated">
+          <p class="note" style="margin-top:6px">On a laptop? Scan this code with your phone.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -583,8 +601,8 @@ document.getElementById('sched').innerHTML = SCHEDULE.map(d => `
     </span></li>`).join('')}
   </ul>`).join('');
 
-// ---------- tabs (hash routing: #map, #map/rwh, #schedule, #register, #parking, #bus) ----------
-const PANELS = ['map','schedule','register','parking','bus'];
+// ---------- tabs (hash routing: #map, #map/rwh, #schedule, #register, #parking, #bus, #survey) ----------
+const PANELS = ['map','schedule','register','parking','bus','survey'];
 if (location.hash.startsWith('#banquet')) history.replaceState(null, '', '#bus');
 function route(){
   const [name, sub] = location.hash.replace('#','').split('/');
